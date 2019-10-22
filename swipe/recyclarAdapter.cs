@@ -46,11 +46,12 @@ namespace swipe
         internal class ViewHolder : RecyclerView.ViewHolder
         {
             public TextView tv;
-            public RelativeLayout bg,fg;
+            public RelativeLayout bg_left, bg,fg;
 
             public ViewHolder(View itemView) : base(itemView)
             {
                 tv = itemView.FindViewById<TextView>(Resource.Id.tv);
+                bg_left = itemView.FindViewById<RelativeLayout>(Resource.Id.bg_left);
                 bg = itemView.FindViewById<RelativeLayout>(Resource.Id.bg);
                 fg = itemView.FindViewById<RelativeLayout>(Resource.Id.fg);
 

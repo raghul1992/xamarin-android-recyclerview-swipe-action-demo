@@ -36,7 +36,9 @@ namespace swipe
             rv.SetAdapter(adapter);
 
             ItemTouchHelper.SimpleCallback callback = new RVItemTouchHelper(0, ItemTouchHelper.Left, this);
+            ItemTouchHelper.SimpleCallback callback_right = new RVItemTouchHelper(0, ItemTouchHelper.Right, this);
             new ItemTouchHelper(callback).AttachToRecyclerView(rv);
+            new ItemTouchHelper(callback_right).AttachToRecyclerView(rv);
 
 
 
@@ -45,6 +47,16 @@ namespace swipe
 
         public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position)
         {
+
+
+            if (direction == ItemTouchHelper.Left)
+            {
+                Toast.MakeText(this, "archive", ToastLength.Short).Show();
+
+            }
+            else {
+                Toast.MakeText(this, "delete", ToastLength.Short).Show();
+            }
             int index = viewHolder.AdapterPosition;
             adapter.removeItem(index);
 

@@ -17,6 +17,7 @@ namespace swipe
 {
     class RVItemTouchHelper : ItemTouchHelper.SimpleCallback
     {
+        private float previousDx = 0;
 
 
         private RVItemTouchHelperListener _listener;
@@ -39,6 +40,7 @@ namespace swipe
             if (_listener != null) {
                 _listener.onSwiped(viewHolder,direction,viewHolder.AdapterPosition);
             }
+            previousDx = 0;
 
         }
 
@@ -63,8 +65,29 @@ namespace swipe
         public override void OnChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, bool isCurrentlyActive)
         {
 
+
             View fg = ((recyclarAdapter.ViewHolder)viewHolder).fg;
+
+            if (dX > 0)
+                {
+                    ((recyclarAdapter.ViewHolder)viewHolder).bg.Visibility= ViewStates.Visible;
+                ((recyclarAdapter.ViewHolder)viewHolder).bg_left.Visibility = ViewStates.Gone; 
+                }
+                else
+            {
+                ((recyclarAdapter.ViewHolder)viewHolder).bg.Visibility = ViewStates.Gone;
+                ((recyclarAdapter.ViewHolder)viewHolder).bg_left.Visibility = ViewStates.Visible;
+            }
+             
+
+
+
+
             DefaultUIUtil.OnDraw(c, recyclerView, fg, dX, dY, actionState, isCurrentlyActive);
+
+            previousDx = dX;
+
+
         }
 
         public override void OnChildDrawOver(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, bool isCurrentlyActive)
